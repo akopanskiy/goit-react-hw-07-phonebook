@@ -1,4 +1,8 @@
-import axios from 'axios';
+import {
+  fetchAllContacts,
+  fetchAddContacts,
+  fetchDeleteContacts,
+} from '../services/contactsAPI';
 import {
   addContactRequest,
   addContactSuccess,
@@ -14,8 +18,7 @@ import {
 const fetchContacts = () => dispatch => {
   dispatch(fetchRequest());
 
-  axios
-    .get('http://localhost:3000/contacts')
+  fetchAllContacts()
     .then(({ data }) => dispatch(fetchSuccess(data)))
     .catch(error => dispatch(fetchError(error)));
 };
@@ -26,16 +29,14 @@ const addContact = (name, number) => dispatch => {
     number,
   };
   dispatch(addContactRequest());
-  axios
-    .post('http://localhost:3000/contacts', contact)
+  fetchAddContacts(contact)
     .then(({ data }) => dispatch(addContactSuccess(data)))
     .catch(error => dispatch(addContactError(error)));
 };
 
 const deleteContact = id => dispatch => {
   dispatch(deleteContactRequest());
-  axios
-    .delete(`http://localhost:3000/contacts/${id}`)
+  fetchDeleteContacts(id)
     .then(() => dispatch(deleteContactSuccess(id)))
     .catch(error => dispatch(deleteContactError(error)));
 };
