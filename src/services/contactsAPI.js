@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:3000/';
+const URL = 'https://phonebook-kopa.herokuapp.com/api';
 
 export const fetchAllContacts = () => {
   return axios.get(`${URL}contacts`);
